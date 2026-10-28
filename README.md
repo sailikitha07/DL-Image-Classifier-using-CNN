@@ -7,7 +7,7 @@ To develop a convolutional neural network (CNN) classification model for the giv
 The MNIST dataset consists of 70,000 grayscale images of handwritten digits (0-9), each of size 28×28 pixels. The task is to classify these images into their respective digit categories. CNNs are particularly well-suited for image classification tasks as they can automatically learn spatial hierarchies of features through convolutional layers, pooling layers, and fully connected layers.
 
 ## Neural Network Model
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b9b65d7c-413b-4159-a42b-9bef619c9cd9" />
+<img width="2126" height="740" alt="image" src="https://github.com/user-attachments/assets/ef36fe43-fbec-4994-becf-9f69ae827dfc" />
 
 
 ## DESIGN STEPS
@@ -87,7 +87,6 @@ train_model(model, train_loader, num_epochs=10)
 ```
 
 ### OUTPUT
-<img width="561" height="487" alt="image" src="https://github.com/user-attachments/assets/9877dd1e-5880-42d8-9fd4-e623403e3fb1" />
 
 ## Training Loss per Epoch
 
