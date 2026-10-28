@@ -7,77 +7,105 @@ To develop a convolutional neural network (CNN) classification model for the giv
 The MNIST dataset consists of 70,000 grayscale images of handwritten digits (0-9), each of size 28×28 pixels. The task is to classify these images into their respective digit categories. CNNs are particularly well-suited for image classification tasks as they can automatically learn spatial hierarchies of features through convolutional layers, pooling layers, and fully connected layers.
 
 ## Neural Network Model
-Include the neural network model diagram.
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b9b65d7c-413b-4159-a42b-9bef619c9cd9" />
+
 
 ## DESIGN STEPS
 ### STEP 1: 
-
-Write your own steps
+Load and Preprocess Data.
 
 ### STEP 2: 
-
+Get the shape of the first image in the training dataset.
 
 
 ### STEP 3: 
-
+Get the shape of the first image in the test dataset.
 
 
 ### STEP 4: 
-
+Train and test the Model.
 
 
 ### STEP 5: 
-
+Predict on a Single Image.
 
 
 ### STEP 6: 
-
+Display the image.
 
 
 
 
 ## PROGRAM
 
-### Name:
+### Name: Cholimgapuram Sai Likitha
 
-### Register Number:
+### Register Number:212224230046
 
-```python
+```
 class CNNClassifier(nn.Module):
-    def __init__(self, input_size):
+    def __init__(self):
         super(CNNClassifier, self).__init__()
-        #Include your code here
+        self.conv1 = nn.Conv2d(1, 16, 3, padding=1)
+        self.pool1 = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(16, 32, 3, padding=1)
+        self.pool2 = nn.MaxPool2d(2, 2)
+        self.fc1 = nn.Linear(32 * 7 * 7, 128)
+        self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
-        #Include your code here
+        x = self.pool1(torch.relu(self.conv1(x)))
+        x = self.pool2(torch.relu(self.conv2(x)))
+        x = x.view(x.size(0), -1)
+        x = torch.relu(self.fc1(x))
+        return self.fc2(x)
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = CNNClassifier().to(device)
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 
+def train_model(model, train_loader, num_epochs=3):
+    model.train()
+    for epoch in range(num_epochs):
+        running_loss = 0.0
+        for images, labels in train_loader:
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            running_loss += loss.item()
 
-# Initialize the Model, Loss Function, and Optimizer
-model =
-criterion =
-optimizer =
+        print("Name: Cholimgapuram Sai Likiha")
+        print("Register Number: 212224230046")
+        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {running_loss/len(train_loader):.4f}")
 
-def train_model(model, train_loadr, num_epochs=10):
-    #Include your code here
+train_model(model, train_loader, num_epochs=10)
 
 ```
 
 ### OUTPUT
+<img width="561" height="487" alt="image" src="https://github.com/user-attachments/assets/9877dd1e-5880-42d8-9fd4-e623403e3fb1" />
 
 ## Training Loss per Epoch
 
-Include the Training Loss per epoch
+<img width="501" height="657" alt="image" src="https://github.com/user-attachments/assets/79557c9c-b15f-4c7c-8ea2-a38f2551c4eb" />
+
 
 ## Confusion Matrix
 
-Include confusion matrix here
+<img width="755" height="682" alt="image" src="https://github.com/user-attachments/assets/89f4eb14-552b-44d7-a395-1a8a31f0147b" />
+
 
 ## Classification Report
-Include classification report here
+<img width="595" height="363" alt="image" src="https://github.com/user-attachments/assets/079c5e2e-b1df-469d-8c27-640b4234a378" />
+
 
 ### New Sample Data Prediction
-Include your sample input and output here
+<img width="521" height="496" alt="image" src="https://github.com/user-attachments/assets/68e83485-cfbf-4b8f-947a-65116a6eac17" />
+
 
 ## RESULT
-Include your result here
+Thus the output is predicted and displayed
